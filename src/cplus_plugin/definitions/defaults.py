@@ -261,3 +261,14 @@ PWL_IMPACT_EXPRESSION_DESCRIPTION = (
     "hectare. The activity area will be "
     "automatically populated during the computation."
 )
+MEAN_BASED_IRRECOVERABLE_CARBON_EXPRESSION_DESCRIPTION = (
+    "Calculates the total irrecoverable carbon (tons C) of "
+    "protection NCS pathways in an activity using the mean "
+    "reference irrecoverable carbon dataset. This dataset "
+    "needs to be defined in the CPLUS settings for this "
+    "expression to be evaluated.<br><b>NOTE: A value of -1.0 "
+    "will be returned if an error is encountered, or 0.0 if "
+    "there are no protected NCS pathways in the activity or "
+    "no overlapping pixels with the reference layer in the "
+    "area of interest.</b>"
+)
