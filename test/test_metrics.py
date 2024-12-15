@@ -9,6 +9,8 @@ from unittest import TestCase
 
 from qgis.core import QgsExpression
 
+from processing.core.Processing import Processing
+
 from cplus_plugin.conf import settings_manager, Settings
 from cplus_plugin.definitions.defaults import BASE_PLUGIN_NAME
 from cplus_plugin.gui.metrics_builder_dialog import ActivityMetricsBuilder
@@ -94,6 +96,9 @@ class TestMetricsBuilder(TestCase):
 class TestMetricExpressions(TestCase):
     """Testing management of metrics in QGIS expression environment."""
 
+    def setUp(self):
+        Processing.initialize()
+
     def test_metric_expression_function_registration(self):
         """Testing the registration of expression functions."""
         register_metric_functions()
@@ -166,6 +171,7 @@ class TestMetricExpressions(TestCase):
         # We first need to configure and save the activity
         activity = get_activity()
         for protected_pathway in get_protected_ncs_pathways():
+            settings_manager.save_ncs_pathway(protected_pathway)
             activity.add_ncs_pathway(protected_pathway)
 
         settings_manager.save_activity(activity)
@@ -190,7 +196,7 @@ class TestMetricExpressions(TestCase):
 
         register_metric_functions()
         context = create_metrics_expression_context()
-        activity_context_info = ActivityContextInfo(get_activity(), 3000)
+        activity_context_info = ActivityContextInfo(activity, 3000)
 
         result = evaluate_activity_metric(
             context, activity_context_info, f"{FUNC_MEAN_BASED_IC}()"
