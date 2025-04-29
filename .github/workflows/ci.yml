@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - test-updated-ci
   pull_request:
     types:
       - edited
