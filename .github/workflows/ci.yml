@@ -65,6 +65,7 @@ jobs:
           cat .env
           docker pull "${IMAGE}":${{ matrix.qgis_version_tag }}
           python admin.py build --tests
+          ls -l ./build/cplus_plugin/scripts/docker
           docker compose up -d
           sleep 10
 
